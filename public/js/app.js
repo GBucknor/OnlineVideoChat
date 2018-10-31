@@ -3,6 +3,7 @@ window.addEventListener('load', () => {
     const chatConTempl = Handlebars.compile($('#chat-content-template').html());
     const chatElement = $('#chat');
     const formElement = $('.form');
+    const userForm = $('#user-form');
     const messages = [];
     let username;
 
@@ -93,6 +94,8 @@ window.addEventListener('load', () => {
         postMessage(`${username} joined the room`);
     };
 
+    // Takes the username, the string message and a timestamp
+    // and passes it to the messages array
     const postMessage = (message) => {
         const chatMessage = {
             username,
@@ -105,8 +108,12 @@ window.addEventListener('load', () => {
         updateChatMessages();
     };
 
+    // Displays new chat room elements such as the text chat
     const showChatRoom = (room) => {
-        formElement.hide();
+        userForm.fadeOut('fast');
+        userForm.hide();
+        remoteVids.fadeIn('fast');
+        chatElement.slideUp(300).delay(100).fadeIn('fast');
         const chatHtml = chatTempl({room});
         chatElement.html(chatHtml);
         const postForm = $('form');
@@ -125,10 +132,14 @@ window.addEventListener('load', () => {
         })
     };
 
+    // Updates the chat ui to scale with new messages
     const updateChatMessages = () => {
         const chatConHtml = chatConTempl({messages});
         const chatConEl = $('#chat-content');
+        chatConEl.css('height', '250px');
+        chatConEl.css('max-height', '250px');
         chatConEl.html(chatConHtml);
+        chatConEl.css('overflow', 'auto');
         const scrollHeight = chatConEl.prop('scrollHeight');
         chatConEl.animate({scrollTop: scrollHeight}, 'slow');
     };
