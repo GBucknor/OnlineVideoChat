@@ -1,7 +1,7 @@
 {
-  "name": "Assignment_1",
+  "name": "Online Video Chat",
   "version": "1.0.0",
-  "description": "",
+  "description": "Chat with your friends!",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
