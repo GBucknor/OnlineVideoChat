@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Test</title>
+        <!-- JQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="scripts/semantic-ui-css/semantic.min.css" />
+    </head>
+    <body>
+        <div class="ui container">
+            <header>
+                <h1 class="ui header">Video Chat</h1>
+            </header>
+            <main>
+                <div class="ui two column stackable grid">
+                    <!-- Chat Videos-->
+                    <div class="ui ten wide column">
+                        <div class="ui segment">
+                            <!-- User Form -->
+                            <div class="ui form">
+                                <div class="fields">
+                                    <div class="field">
+                                        <label>UserName<input type="text" id="user" name="user" placeholder="Username"/></label>
+                                    </div>
+                                    <div class="field">
+                                        <label>Room<input type="text" id="rName" name="rName" placeholder="Enter a name for the room" /></label>
+                                    </div>
+                                </div>
+                                <div class="ui buttons">
+                                    <div id="create-btn" class="ui submit orange button">Create Room</div>
+                                    <div class="or"></div>
+                                    <div id="join-btn" class="ui submit green button">Join A Room</div>
+                                </div>
+                            </div>
+                            <div id="chat"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui six wide column">
+                    <h4 class="ui center aligned header">Local Camera</h4>
+                    <img id="local-image" class="ui medium image" src="images/video.svg" />
+                    <video id="local-video" class="ui medium image hidden" autoplay="true"></video>
+                </div>
+
+                <!-- Remote video container -->
+
+                <h3 class="ui center aligned header">Your Friends</h3>
+                <div id="remote-v" class="ui stackable grid">
+                    <div class="four wide column">
+                        <img class="ui centered medium image" src="images/video.svg" />
+                    </div>
+                    <div class="four wide column">
+                        <img class="ui centered medium image" src="images/video.svg" />
+                    </div>
+                    <div class="four wide column">
+                        <img class="ui centered medium image" src="images/video.svg" />
+                    </div>
+                    <div class="four wide column">
+                        <img class="ui centered medium image" src="images/video.svg" />
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- Handlebar Templates -->
+        <!-- Chat template -->
+        <script id="chat-template" type="text/x-handlebars-template">
+            <h3 class="ui orange header">Room ID -> <strong>{{ room }}</strong></h3>
+            <hr>
+            <div id="chat-content" class="ui feed"> </div>
+                <hr>
+                <div class="ui form">
+                    <div class="ui field">
+                    <label>Post Message</label>
+                    <textarea id="post-message" name="post-message" rows="1"></textarea>
+                    </div>
+                    <div id="post-btn" class="ui primary submit button">Send</div>
+            </div>
+        </script>
+
+        <!-- Chat Content Template -->
+        <script id="chat-content-template" type="text/x-handlebars-template">
+            {{#each messages}}
+            <div class="event">
+                <div class="label">
+                <i class="icon blue user"></i>
+                </div>
+                <div class="content">
+                <div class="summary">
+                    <a href="#"> {{ username }}</a> posted on
+                    <div class="date">
+                    {{ postedOn }}
+                    </div>
+                </div>
+                <div class="extra text">
+                    {{ message }}
+                </div>
+                </div>
+            </div>
+            {{/each}}
+        </script>
+
+        <!-- Remote Video Template -->
+        <script id="remote-video-template" type="text/x-handlebars-template">
+            <div id="{{ id }}" class="four wide column"></div>
+        </script>
+
+        <!-- Bunch of Scripts-->
+        <script src="scripts/jquery/dist/jquery.min.js"></script>
+        <script src="scripts/semantic-ui-css/semantic.min.js"></script>
+        <script src="scripts/handlebars/dist/handlebars.min.js"></script>
+        <script src="scripts/simplewebrtc/out/simplewebrtc-with-adapter.bundle.js"></script>
+        <script src="js/app.js"></script>
+    </body>
+</html>
