@@ -2,7 +2,6 @@ window.addEventListener('load', () => {
     const chatTempl = Handlebars.compile($('#chat-template').html());
     const chatConTempl = Handlebars.compile($('#chat-content-template').html());
     const chatElement = $('#chat');
-    const formElement = $('.form');
     const userForm = $('#user-form');
     const messages = [];
     let username;
@@ -16,10 +15,26 @@ window.addEventListener('load', () => {
     const remoteVids = $('#remote-v');
     let remoteVidCount = 0;
 
-    formElement.form({
+    userForm.form({
         fields: {
-            roomName: 'empty',
-            username: 'empty', 
+            rName: {
+                identifier: 'rName',
+                rules: [
+                    {
+                        type   : 'empty',
+                        prompt : 'Please enter a room name.'
+                    }
+                ]
+            },
+            user: {
+                identifier: 'user',
+                rules: [
+                    {
+                        type: 'empty',
+                        prompt: 'Please enter a username.'
+                    }
+                ]
+            }, 
         },
     });
 
@@ -65,7 +80,7 @@ window.addEventListener('load', () => {
 
     // Sets the function calls for the two submit btns in the user form.
     $('.submit').on('click', (event) => {
-        if (!formElement.form('is valid')) {
+        if (!userForm.form('is valid')) {
             return false;
         }
 
