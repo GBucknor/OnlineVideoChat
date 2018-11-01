@@ -63,6 +63,7 @@ window.addEventListener('load', () => {
         remoteVidCount += 1;
     });
 
+    // Sets the function calls for the two submit btns in the user form.
     $('.submit').on('click', (event) => {
         if (!formElement.form('is valid')) {
             return false;
@@ -79,6 +80,7 @@ window.addEventListener('load', () => {
         return false;
     });
 
+    // Creates a room and indicates it in the console.
     const createRoom = (roomName) => {
         console.info(`Creating room: ${roomName}`);
         wrtc.createRoom(roomName, (err, name) => {
@@ -87,6 +89,7 @@ window.addEventListener('load', () => {
         });
     };
 
+    // Calls the webrtc function join room and then shows the user an existing room
     const joinRoom = (roomName) => {
         console.info(`Joining room: ${roomName}`);
         wrtc.joinRoom(roomName);
