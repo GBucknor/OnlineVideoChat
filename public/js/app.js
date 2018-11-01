@@ -1,8 +1,9 @@
-window.addEventListener('load', () => {
+$(document).ready(() => {
     const chatTempl = Handlebars.compile($('#chat-template').html());
     const chatConTempl = Handlebars.compile($('#chat-content-template').html());
     const chatElement = $('#chat');
     const userForm = $('#user-form');
+    const userFormCon = $('#user-form > .form');
     const messages = [];
     let username;
 
@@ -15,17 +16,9 @@ window.addEventListener('load', () => {
     const remoteVids = $('#remote-v');
     let remoteVidCount = 0;
 
-    userForm.form({
+    userFormCon.form({
+        on: blur,
         fields: {
-            rName: {
-                identifier: 'rName',
-                rules: [
-                    {
-                        type   : 'empty',
-                        prompt : 'Please enter a room name.'
-                    }
-                ]
-            },
             user: {
                 identifier: 'user',
                 rules: [
@@ -35,6 +28,15 @@ window.addEventListener('load', () => {
                     }
                 ]
             }, 
+            rName: {
+                identifier: 'rName',
+                rules: [
+                    {
+                        type   : 'empty',
+                        prompt : 'Please enter a room name.'
+                    }
+                ]
+            },
         },
     });
 
@@ -51,8 +53,8 @@ window.addEventListener('load', () => {
 
     // Runs video recording using the user's camera
     wrtc.on('localStream', () => {
-        localImageEl.hide();
-        localVideoEl.show();
+        localImageEl.fadeOut('fast');
+        localVideoEl.slideUp(300).delay(300).fadeIn('fast');
     });
 
     // Displays chat messages that are sent to the room.
@@ -80,7 +82,7 @@ window.addEventListener('load', () => {
 
     // Sets the function calls for the two submit btns in the user form.
     $('.submit').on('click', (event) => {
-        if (!userForm.form('is valid')) {
+        if (!userFormCon.form('is valid')) {
             return false;
         }
 
