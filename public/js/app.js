@@ -90,9 +90,9 @@ $(document).ready(() => {
         const roomName = $('#rName').val();
 
         if (event.target.id === 'create-btn') {
-            createRoom(roomName);
+            createRoom(roomName.toLowerCase());
         } else {
-            joinRoom(roomName);
+            joinRoom(roomName.toLowerCase());
         }
         return false;
     });
@@ -130,6 +130,7 @@ $(document).ready(() => {
 
     // Displays new chat room elements such as the text chat
     const showChatRoom = (room) => {
+        $('#local-name').html(username);
         userForm.fadeOut('fast');
         userForm.hide();
         remoteVids.fadeIn('fast');
