@@ -67,7 +67,7 @@ $(document).ready(() => {
     });
 
     // Adds a stream from a remote user that wants to join the room.
-    wrtc.on('videoAdded', (video, peer) => {
+    wrtc.on('videoAdded', (videoEl, peer) => {
         const id = wrtc.getDomId(peer);
         const remoteVidHtml = rVideoTempl({id});
         if (remoteVidCount === 0) {
@@ -75,7 +75,7 @@ $(document).ready(() => {
         } else {
             remoteVids.append(remoteVidHtml);
         }
-        $(`#${id}`).html(video);
+        $(`#${id}`).html(videoEl);
         $(`#${id} video`).addClass('ui image medium');
         $(`#${id} video`).prop('autoplay') = true;
         remoteVidCount += 1;
