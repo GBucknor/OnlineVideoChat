@@ -77,7 +77,6 @@ $(document).ready(() => {
         }
         $(`#${id}`).html(videoEl);
         $(`#${id} video`).addClass('ui image medium');
-        $(`#${id} video`).prop('autoplay') = true;
         remoteVidCount += 1;
     });
 
